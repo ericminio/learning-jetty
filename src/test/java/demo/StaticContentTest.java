@@ -4,6 +4,7 @@ import org.eclipse.jetty.server.handler.ResourceHandler;
 import org.junit.Test;
 import http.Resource;
 import support.JettyTest;
+import support.PathTo;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -24,7 +25,7 @@ public class StaticContentTest extends JettyTest {
     @Test
     public void canServeStaticFile() throws Exception {
         ResourceHandler files = new ResourceHandler();
-        files.setResourceBase("./src/test/resources");
+        files.setResourceBase(PathTo.resources("/plain"));
         server.setHandler(files);
         server.start();
 
