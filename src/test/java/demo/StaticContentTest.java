@@ -1,27 +1,14 @@
-package ericminio;
+package demo;
 
-import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.ResourceHandler;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
+import http.Resource;
+import support.JettyTest;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class JettyCanServeStaticContentTest {
-
-    private Server server;
-
-    @Before
-    public void aJettyServer() throws Exception {
-        server = new Server(8888);
-    }
-
-    @After
-    public void stopServer() throws Exception {
-        server.stop();
-    }
+public class StaticContentTest extends JettyTest {
 
     @Test
     public void canServeDirectoryContent() throws Exception {
@@ -31,16 +18,16 @@ public class JettyCanServeStaticContentTest {
         server.setHandler(files);
         server.start();
 
-        assertThat(Get.contentOf("http://localhost:8888"), containsString("test"));
+        assertThat(Resource.withUrl("http://localhost:8888"), containsString("test"));
     }
 
     @Test
     public void canServeStaticFile() throws Exception {
         ResourceHandler files = new ResourceHandler();
-        files.setResourceBase("./src");
+        files.setResourceBase("./src/test/resources");
         server.setHandler(files);
         server.start();
 
-        assertThat(Get.contentOf("http://localhost:8888/test/java/ericminio/TddReadyTest.java"), containsString("canAssert()"));
+        assertThat(Resource.withUrl("http://localhost:8888/keep.calm"), containsString("and write tests"));
     }
 }
