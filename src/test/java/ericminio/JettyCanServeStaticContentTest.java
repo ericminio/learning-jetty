@@ -9,12 +9,12 @@ import org.junit.Test;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class JettyCanServeDirectoryContentTest {
+public class JettyCanServeStaticContentTest {
 
     private Server server;
 
     @Before
-    public void startServer() throws Exception {
+    public void aJettyServer() throws Exception {
         server = new Server(8888);
     }
 
@@ -32,5 +32,15 @@ public class JettyCanServeDirectoryContentTest {
         server.start();
 
         assertThat(Get.contentOf("http://localhost:8888"), containsString("test"));
+    }
+
+    @Test
+    public void canServeStaticFile() throws Exception {
+        ResourceHandler files = new ResourceHandler();
+        files.setResourceBase("./src");
+        server.setHandler(files);
+        server.start();
+
+        assertThat(Get.contentOf("http://localhost:8888/test/java/ericminio/TddReadyTest.java"), containsString("canAssert()"));
     }
 }
