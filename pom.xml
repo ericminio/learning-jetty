@@ -28,11 +28,15 @@
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>apache-jsp</artifactId>
             <version>${jetty-version}</version>
-            <type>jar</type>
         </dependency>
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-annotations</artifactId>
+            <version>${jetty-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>apache-jstl</artifactId>
             <version>${jetty-version}</version>
         </dependency>
     </dependencies>
