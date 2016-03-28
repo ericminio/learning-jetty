@@ -11,7 +11,7 @@ public class PathTo {
 
     @Test
     public void expectedJspUri() throws Exception {
-        assertThat(PathTo.resources("/jsp"), endsWith("learning-jetty/target/classes/jsp"));
+        assertThat(PathTo.resources("/jsp"), endsWith("/jsp"));
     }
 
     public static String resources(String type) throws URISyntaxException {
