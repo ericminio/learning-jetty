@@ -25,7 +25,7 @@ public class StaticContentTest extends JettyTest {
     @Test
     public void canServeStaticFile() throws Exception {
         ResourceHandler files = new ResourceHandler();
-        files.setResourceBase(PathTo.resources("/plain"));
+        files.setResourceBase(PathTo.resources("/webapp"));
         server.setHandler(files);
         server.start();
 

@@ -1,34 +1,57 @@
 package demo;
 
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.endsWith;
+import static org.hamcrest.MatcherAssert.assertThat;
 import http.Resource;
+
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.jetty.annotations.ServletContainerInitializersStarter;
 import org.eclipse.jetty.apache.jsp.JettyJasperInitializer;
 import org.eclipse.jetty.plus.annotation.ContainerInitializer;
+import org.eclipse.jetty.webapp.WebAppClassLoader;
 import org.eclipse.jetty.webapp.WebAppContext;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
+
 import support.JettyTest;
 import support.JspScratchDir;
 import support.PathTo;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+public class CustomTagTest extends JettyTest {
 
-import static org.hamcrest.CoreMatchers.containsString;
-import static org.hamcrest.MatcherAssert.assertThat;
+	private WebAppContext context;
 
-public class JstlTest extends JettyTest {
-
-    @Test
-    public void canServeJspWithTaglib() throws Exception {
-        WebAppContext context = new WebAppContext();
+	@Before
+	public void startServer() throws Exception {
+		context = new WebAppContext();
         enableJspCompilation(context);
         context.setContextPath("/");
         context.setResourceBase(PathTo.resources("/webapp"));
         server.setHandler(context);
-        server.start();
-
-        assertThat(Resource.withUrl("http://localhost:8888/jstl.jsp"), containsString("10"));
+        server.start();       
+	}
+	
+	@After
+	public void closeServer() throws Exception {
+		server.stop();
+	}
+	
+	@Test
+	public void canRetrieveCustomTagDefinition() throws Exception {
+		assertThat(context.getResourcePaths("/WEB-INF/").size(), equalTo(1));
+		assertThat(context.getResourcePaths("/WEB-INF/").iterator().next(), equalTo("/WEB-INF/hello-world.tld"));
+	}
+	
+	@Test
+    public void canServeJspWithCustomTag() throws Exception {
+        assertThat(Resource.withUrl("http://localhost:8888/custom-tag.jsp"), containsString("Hello from custom tag"));
     }
 
     private void enableJspCompilation(WebAppContext context) throws IOException {

@@ -28,7 +28,7 @@ public class JspTest extends JettyTest {
         WebAppContext context = new WebAppContext();
         enableJspCompilation(context);
         context.setContextPath("/");
-        context.setResourceBase(PathTo.resources("/jsp"));
+        context.setResourceBase(PathTo.resources("/webapp"));
         server.setHandler(context);
         server.start();
 

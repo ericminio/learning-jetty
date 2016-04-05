@@ -11,7 +11,7 @@ public class PathTo {
 
     @Test
     public void expectedJspUri() throws Exception {
-        assertThat(PathTo.resources("/jsp"), endsWith("/jsp"));
+        assertThat(PathTo.resources("/webapp"), endsWith("/webapp"));
     }
 
     public static String resources(String type) throws URISyntaxException {
