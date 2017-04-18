@@ -16,4 +16,5 @@ dependencies {
     compile group: 'org.eclipse.jetty', name: 'apache-jsp', version:jettyVersion
     compile group: 'org.eclipse.jetty', name: 'jetty-annotations', version:jettyVersion
     compile group: 'org.eclipse.jetty', name: 'apache-jstl', version:jettyVersion
+    compile group: 'org.eclipse.jetty.websocket', name: 'javax-websocket-server-impl', version:jettyVersion
 }
