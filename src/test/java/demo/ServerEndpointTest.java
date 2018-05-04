@@ -28,7 +28,7 @@ public class ServerEndpointTest extends JettyTest {
         server.start();
     }
 
-    @Test(timeout = 200)
+    @Test(timeout = 500)
     public void canServeServerEndpoint() throws Exception {
         URI uri = URI.create("ws://localhost:8888/products/42");
         WebSocketContainer container = ContainerProvider.getWebSocketContainer();
