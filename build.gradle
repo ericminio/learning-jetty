@@ -8,7 +8,7 @@ repositories {
      maven { url "http://repo.maven.apache.org/maven2" }
 }
 
-def jettyVersion = "9.2.14.v20151106"
+def jettyVersion = "9.4.8.v20171121"
 
 dependencies {
     compile group: 'junit', name: 'junit', version:'4.12'
@@ -17,4 +17,5 @@ dependencies {
     compile group: 'org.eclipse.jetty', name: 'jetty-annotations', version:jettyVersion
     compile group: 'org.eclipse.jetty', name: 'apache-jstl', version:jettyVersion
     compile group: 'org.eclipse.jetty.websocket', name: 'javax-websocket-server-impl', version:jettyVersion
+    compile group: 'org.jboss.weld.servlet', name: 'weld-servlet-shaded', version:'3.0.4.Final'
 }
